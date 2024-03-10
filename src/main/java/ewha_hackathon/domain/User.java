@@ -1,4 +1,5 @@
 package ewha_hackathon.domain;
+
 import jakarta.persistence.*;
 
 @Entity
