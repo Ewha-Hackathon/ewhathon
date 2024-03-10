@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/css/#}" />
+</head>
+<body>
+<div th:if="${username != null}">
+    <h1 th:text="${username} + '님, 환영합니다!'"></h1>
+    <form action="/logout" method="get">
+        <button type="submit">로그아웃</button>
+    </form>
+</div>
+<div th:unless="${username != null}">
+    <p>로그인하거나 회원가입을 해주세요.</p>
+</div>
+
+</body>
+</html>
