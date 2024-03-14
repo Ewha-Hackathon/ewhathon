@@ -18,4 +18,5 @@ public class EventRequestDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate end_date;
     private Boolean free;
+    private String content;
 }

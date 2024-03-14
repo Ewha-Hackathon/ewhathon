@@ -30,7 +30,8 @@ public class Event {
     private LocalDate post_date;    //올린 날짜
     private LocalDate start_date;
     private LocalDate end_date;
-    private Boolean free;
+    private boolean free;
+    private String content;
 
     public static Event createEvent(EventRequestDto dto, User user){
         return new Event(
@@ -44,7 +45,8 @@ public class Event {
                 LocalDate.now(),
                 dto.getStart_date(),
                 dto.getEnd_date(),
-                dto.getFree()
+                dto.getFree(),
+                dto.getContent()
         );
     }
 }
