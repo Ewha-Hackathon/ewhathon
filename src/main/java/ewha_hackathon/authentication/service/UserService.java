@@ -1,4 +1,4 @@
-package ewha_hackathon.service;
+package ewha_hackathon.authentication.service;
 
 import ewha_hackathon.domain.User;
 import ewha_hackathon.repository.UserRepository;

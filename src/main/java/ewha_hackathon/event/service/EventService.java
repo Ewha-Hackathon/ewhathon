@@ -1,6 +1,6 @@
-package ewha_hackathon.service;
+package ewha_hackathon.event.service;
 
-import ewha_hackathon.DTO.EventRequestDto;
+import ewha_hackathon.event.DTO.EventRequestDto;
 import ewha_hackathon.domain.Event;
 import ewha_hackathon.domain.User;
 import ewha_hackathon.repository.EventRepository;

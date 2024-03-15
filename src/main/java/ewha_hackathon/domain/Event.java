@@ -1,6 +1,6 @@
 package ewha_hackathon.domain;
 
-import ewha_hackathon.DTO.EventRequestDto;
+import ewha_hackathon.event.DTO.EventRequestDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

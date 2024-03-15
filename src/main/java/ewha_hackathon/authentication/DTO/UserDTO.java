@@ -1,4 +1,4 @@
-package ewha_hackathon.DTO;
+package ewha_hackathon.authentication.DTO;
 
 public class UserDTO {
 
