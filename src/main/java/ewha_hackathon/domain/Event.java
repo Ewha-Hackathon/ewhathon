@@ -33,7 +33,10 @@ public class Event {
     private boolean free;
     private String content;
 
-    public static Event createEvent(EventRequestDto dto, User user){
+    private String filename;//파일이름
+    private String filepath;//파일경로
+
+    public static Event createEvent(EventRequestDto dto, User user, String filename, String filepath){
         return new Event(
                 dto.getId(),
                 user,
@@ -46,7 +49,9 @@ public class Event {
                 dto.getStart_date(),
                 dto.getEnd_date(),
                 dto.getFree(),
-                dto.getContent()
+                dto.getContent(),
+                filename,
+                filepath
         );
     }
 }
