@@ -1,8 +1,8 @@
-package ewha_hackathon.controller;
+package ewha_hackathon.event.controller;
 
-import ewha_hackathon.DTO.EventRequestDto;
+import ewha_hackathon.event.DTO.EventRequestDto;
 import ewha_hackathon.domain.User;
-import ewha_hackathon.service.EventService;
+import ewha_hackathon.event.service.EventService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

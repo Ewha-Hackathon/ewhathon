@@ -1,4 +1,4 @@
-package ewha_hackathon.DTO;
+package ewha_hackathon.event.DTO;
 
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
