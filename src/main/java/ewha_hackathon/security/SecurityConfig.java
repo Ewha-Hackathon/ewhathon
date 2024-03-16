@@ -1,5 +1,7 @@
 package ewha_hackathon.security;
 
+import ewha_hackathon.security.Handler.FailureHandler;
+import ewha_hackathon.security.Handler.SuccessHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,26 +39,27 @@ public class SecurityConfig {
 //                                "/css/**",
 //                                "/images/**",
 //                                "/js/**",
-//                                "/favicon.ico",
 //                                "/header",
 //                                "/main",
 //                                "/checkEmail",
 //                                "/signup",
 //                                "/login",
-//                                "/search",
-//                                "/searchResults"
+//                                "/eventRegister",
+//                                "/event/create",
+//                                "/event",
+//                                "/create"
 //                        ).permitAll()
 //                        .anyRequest().authenticated())
-                // 스프링시큐리티 활용해서 로그인 하면 계속 에러 떠서
-                // (로그인 하기 위한 findByEmail메서드 실행조차 안됨)
-                // disable으로 해놨는데 수정이 필요할 것 같긴해요..
+//                // 스프링시큐리티 활용해서 로그인 하면 계속 에러 떠서
+//                // (로그인 하기 위한 findByEmail메서드 실행조차 안됨)
+//                // disable으로 해놨는데 수정이 필요할 것 같긴해요..
 //                .formLogin((formLogin) -> formLogin
 //                                .disable()
-//                        .loginPage("/login")
-//                        .defaultSuccessUrl("/main")
-//                        .permitAll()
-//                        .successHandler(new SuccessHandler())
-//                        .failureHandler(new FailureHandler())
+////                        .loginPage("/login")
+////                        .defaultSuccessUrl("/main")
+////                        .permitAll()
+////                        .successHandler(new SuccessHandler())
+////                        .failureHandler(new FailureHandler())
 //                )
 //                .logout((logout) -> logout
 //                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
@@ -67,7 +70,8 @@ public class SecurityConfig {
 //                        .invalidSessionUrl("/login"))
 //                .csrf((csrf) -> csrf
 //                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()));
-        http.csrf((csrf->csrf.disable()));
+        http.csrf((csrf)->csrf.disable());
+
         return http.build();
     }
 }

@@ -24,9 +24,9 @@ public class Event {
     @JoinColumn(name = "user_id")
     private User user_id;   //게시물 작성자
     
-    @Column(nullable = false)
+    @Column
     @Enumerated(EnumType.STRING)
-    private Category category;    //종류
+    private Category category;    //종류(공연,작품,연구..)
     private String title;
     private String location;
     private String host;    //주최자(단체명)
@@ -36,34 +36,38 @@ public class Event {
     private boolean free;
     private String content;
     @ElementCollection
-    private List<String> keywords;
+    private List<String> keywords;  //해시태그
     private String filename;//파일이름
     private String filepath;//파일경로
 
     @ColumnDefault("0")
     private Integer heart_count;
-
     @ColumnDefault("0")
     private Integer rsvp_count;
 
-    public static Event createEvent(EventRequestDto dto, User user, String filename, String filepath){
+    public static Event createEvent(User user, Category category, String title, String location, String host, LocalDate startDate, LocalDate endDate, int free, String content, String filename, String filepath) {
+        boolean freeBoolean;
+        if(free == 0)
+            freeBoolean = true;
+        else
+            freeBoolean = false;
+
         return new Event(
-                dto.getId(),
+                null,
                 user,
-                dto.getCategory(),
-                dto.getTitle(),
-                dto.getLocation(),
-                dto.getHost(),
+                category,
+                title,
+                location,
+                host,
                 LocalDate.now(),
-                dto.getStart_date(),
-                dto.getEnd_date(),
-                dto.getFree(),
-                dto.getContent(),
-                dto.getKeywords(),
+                startDate,
+                endDate,
+                freeBoolean,
+                content,
+                null,
                 filename,
                 filepath,
                 0,
-                0
-        );
+                0);
     }
 }
