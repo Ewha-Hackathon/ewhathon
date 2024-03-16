@@ -23,6 +23,7 @@ public class Event {
     private User user_id;   //게시물 작성자
     
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Category category;    //종류
     private String title;
     private String location;

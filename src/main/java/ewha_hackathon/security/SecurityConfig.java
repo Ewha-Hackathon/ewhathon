@@ -1,7 +1,5 @@
 package ewha_hackathon.security;
 
-import ewha_hackathon.security.Handler.FailureHandler;
-import ewha_hackathon.security.Handler.SuccessHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,7 +41,9 @@ public class SecurityConfig {
                                 "/main",
                                 "/checkEmail",
                                 "/signup",
-                                "/login"
+                                "/login",
+                                "/search",
+                                "/searchResults"
                         ).permitAll()
                         .anyRequest().authenticated())
                 // 스프링시큐리티 활용해서 로그인 하면 계속 에러 떠서

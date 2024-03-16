@@ -1,4 +1,4 @@
-package search;
+package ewha_hackathon.search;
 
 import ewha_hackathon.domain.Category;
 import org.springframework.beans.factory.annotation.Autowired;

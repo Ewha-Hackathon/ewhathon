@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>search</title>
+</head>
+<body>
+<h1>검색</h1>
+<form action="/searchResults" method="get">
+    <div>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title">
+    </div>
+    <div>
+        <label for="category">Category:</label>
+        <select id="category" name="category">
+            <option value="공연">공연</option>
+            <option value="학회">학회</option>
+            <option value="전시">전시</option>
+            <option value="마켓">마켓</option>
+            <option value="설명회">설명회</option>
+            <option value="공식행사">공식행사</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="startDate">Start Date:</label>
+        <input type="date" id="startDate" name="startDate">
+    </div>
+    <div>
+        <label for="endDate">End Date:</label>
+        <input type="date" id="endDate" name="endDate">
+    </div>
+    <div>
+        <label for="free">Free:</label>
+        <select id="free" name="free">
+            <option value="">전체</option>
+            <option value="0">무료</option>
+            <option value="1">유료</option>
+        </select>
+    </div>
+    <div>
+        <label for="keywords">Keywords:</label>
+        <input type="text" id="keywords" name="keywords" placeholder="Keyword1, Keyword2">
+    </div>
+    <button type="submit">Search</button>
+</form>
+</body>
+</html>
