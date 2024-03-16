@@ -7,6 +7,7 @@ import ewha_hackathon.domain.User;
 import ewha_hackathon.event.DTO.EventResponseDto;
 import ewha_hackathon.event.service.EventService;
 import ewha_hackathon.suggestion.SuggestionController;
+import ewha_hackathon.suggestion.SuggestionService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -27,26 +28,27 @@ public class EventController {
     private EventService eventService;
 
     @Autowired
-    private SuggestionController suggestionController; // SuggestionController를 주입
+    private SuggestionService suggestionService;
 
     @PostMapping("/create")
     public String createEvent(@RequestParam("category") Category category,
-                                              @RequestParam("title") String title,
-                                              @RequestParam("location") String location,
-                                              @RequestParam("host") String host,
-                                              @RequestParam("start_date") LocalDate start_date,
-                                              @RequestParam("end_date") LocalDate end_date,
-                                              @RequestParam("free") int free,
-                                              @RequestParam("content") String content,
-                                              @RequestParam("file") MultipartFile file,
-                                              HttpSession session,
-                                              RedirectAttributes redirectAttributes) throws Exception {
+                              @RequestParam("title") String title,
+                              @RequestParam("location") String location,
+                              @RequestParam("host") String host,
+                              @RequestParam("start_date") LocalDate start_date,
+                              @RequestParam("end_date") LocalDate end_date,
+                              @RequestParam("free") int free,
+                              @RequestParam("content") String content,
+                              @RequestParam("file") MultipartFile file,
+                              HttpSession session,
+                              RedirectAttributes redirectAttributes) throws Exception {
         User user = (User) session.getAttribute("user");
         if (user == null)
             throw new IllegalStateException("세션 없음");
 
         Long eventId = eventService.createEvent(user, category, title, location, host, start_date, end_date, free, content, file);
-        suggestionController.suggestKeywords(eventId);
+        suggestionService.suggestKeywords(eventId);
+
         redirectAttributes.addAttribute("eventId", eventId);
 
         return "redirect:/keywordsRegister/" + eventId;

@@ -29,7 +29,7 @@ public class SuggestionService {
     @Autowired
     private SuggestionRepository suggestionRepository;
 
-    public List<String> fetchSuggestedKeywords(String description) {
+    public List<String> fetchSuggestedKeywords(Long eventId, String description) {
         // Flask 서버의 URL
         String url = "http://localhost:5000/extractKeywords";
         HttpHeaders headers = new HttpHeaders();
@@ -42,7 +42,25 @@ public class SuggestionService {
         List<String> keywords = restTemplate.exchange(url, HttpMethod.POST, entity, List.class).getBody();
         System.out.println(keywords);
 
+        saveKeywords(eventId, keywords);
+
         return keywords;
+    }
+
+    public List<String> suggestKeywords(Long eventId) {
+        Event event = eventRepository.findById(eventId)
+                .orElseThrow(() -> new IllegalArgumentException("Event not found"));
+        return fetchSuggestedKeywords(eventId, event.getContent());
+    }
+
+    @Transactional
+    public void saveKeywords(Long eventId, List<String> keywords) {
+        Event event = eventRepository.findById(eventId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 event_id 없음: " + eventId));
+        Suggestion suggestion = new Suggestion();
+        suggestion.setEvent(event);
+        suggestion.setSuggestedKeywords(String.join(",", keywords));
+        suggestionRepository.save(suggestion);
     }
 
     @Transactional
@@ -58,4 +76,3 @@ public class SuggestionService {
         }
     }
 }
-

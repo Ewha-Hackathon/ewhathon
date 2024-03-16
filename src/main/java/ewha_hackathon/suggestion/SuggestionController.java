@@ -26,12 +26,12 @@ public class SuggestionController {
         return "keywordsRegister";
     }
 
-    @GetMapping("/suggestKeywords/{eventId}")
-    public ResponseEntity<List<String>> suggestKeywords(@PathVariable Long eventId) {
-        Event event = eventService.findEventById(eventId);
-        List<String> keywords = suggestionService.fetchSuggestedKeywords(event.getContent());
-        return ResponseEntity.ok(keywords);
-    }
+//    @GetMapping("/suggestKeywords/{eventId}")
+//    public ResponseEntity<List<String>> suggestKeywords(@PathVariable Long eventId) {
+//        Event event = eventService.findEventById(eventId);
+//        List<String> keywords = suggestionService.fetchSuggestedKeywords(event.getContent());
+//        return ResponseEntity.ok(keywords);
+//    }
 
     @PostMapping("/suggestKeywords/{eventId}")
     public String submitKeywords(@RequestParam("eventId") Long eventId,

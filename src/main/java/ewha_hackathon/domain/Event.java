@@ -41,6 +41,10 @@ public class Event {
     private String filepath;//파일경로
     private int count;  //좋아요 개수
 
+    public String getContent() {
+        return content;
+    }
+
     public static Event createEvent(User user, Category category, String title, String location, String host, LocalDate startDate, LocalDate endDate, int free, String content, String filename, String filepath) {
         boolean freeBoolean;
         if(free == 0)
