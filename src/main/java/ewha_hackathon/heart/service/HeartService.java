@@ -40,7 +40,7 @@ public class HeartService {
                 .build();
 
         heartRepository.save(heart);
-        eventRepository.updateCount(event,true);
+//        eventRepository.updateCount(event,true);
     }
     @Transactional
     public void delete(HeartRequestDTO heartRequestDTO) {
@@ -54,7 +54,7 @@ public class HeartService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,"Could not found heart id"));
 
         heartRepository.delete(heart);
-        eventRepository.updateCount(event,false);
+//        eventRepository.updateCount(event,false);
     }
 
 }

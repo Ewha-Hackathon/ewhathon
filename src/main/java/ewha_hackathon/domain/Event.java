@@ -24,6 +24,7 @@ public class Event {
     private User user_id;   //게시물 작성자
     
     @Column
+    @Enumerated(EnumType.STRING)
     private Category category;    //종류(공연,작품,연구..)
     private String title;
     private String location;
