@@ -16,7 +16,8 @@ import java.util.List;
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long event_id;
+    @Column(name = "event_id")
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
