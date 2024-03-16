@@ -1,25 +1,35 @@
 package ewha_hackathon.suggestion;
 
-import ewha_hackathon.domain.Suggestion;
+import ewha_hackathon.domain.Event;
+import ewha_hackathon.event.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+
 @RestController
-@RequestMapping("/api/suggestion")
 public class SuggestionController {
 
-    private final SuggestionService suggestionService;
+    @Autowired
+    private SuggestionService suggestionService;
 
     @Autowired
-    public SuggestionController(SuggestionService suggestionService) {
-        this.suggestionService = suggestionService;
+    private EventService eventService;
+
+    @GetMapping("/suggestKeywords/{eventId}")
+    public ResponseEntity<List<String>> suggestKeywords(@PathVariable Long eventId) {
+        Event event = eventService.findEventById(eventId);
+        List<String> keywords = suggestionService.fetchSuggestedKeywords(event.getContent());
+        return ResponseEntity.ok(keywords);
     }
 
-    @GetMapping
-    public List<Suggestion> getAllSuggestions() {
-        return suggestionService.findAll();
+    @PostMapping("/suggestKeywords/{eventId}")
+    public String submitKeywords(@RequestParam("eventId") Long eventId,
+                                 @RequestParam("selectedKeywords") List<String> selectedKeywords,
+                                 RedirectAttributes redirectAttributes) {
+        suggestionService.updateEventKeywords(eventId, selectedKeywords);
+        return "redirect:/main";
     }
 }

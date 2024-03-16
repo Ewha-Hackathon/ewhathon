@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -35,7 +36,7 @@ public class Event {
     private boolean free;
     private String content;
     @ElementCollection
-    private List<String> keywords;  //해시태그
+    private List<String> keywords = new ArrayList<>();  //해시태그
     private String filename;//파일이름
     private String filepath;//파일경로
     private int count;  //좋아요 개수
