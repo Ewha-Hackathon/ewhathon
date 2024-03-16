@@ -19,7 +19,7 @@ public class EventRequestDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate end_date;
     private Boolean free;
-    private String explain;
+    private String content;
     private List<String> keywords;
     private MultipartFile file;
 }
