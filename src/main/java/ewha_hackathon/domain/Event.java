@@ -39,33 +39,6 @@ public class Event {
     private String filepath;//파일경로
     private int count;  //좋아요 개수
 
-
-//    public static Event createEvent(EventRequestDto dto, User user, String filename, String filepath){
-//        boolean free;
-//        if(dto.getFree() == 0)
-//            free = true;
-//        else
-//            free = false;
-//
-//        return new Event(
-//                dto.getId(),
-//                user,
-//                dto.getCategory(),
-//                dto.getTitle(),
-//                dto.getLocation(),
-//                dto.getHost(),
-//                LocalDate.now(),
-//                dto.getStart_date(),
-//                dto.getEnd_date(),
-//                free,
-//                dto.getContent(),
-//                dto.getKeywords(),
-//                filename,
-//                filepath,
-//                0   //초기값 0 지정
-//        );
-//    }
-
     public static Event createEvent(User user, Category category, String title, String location, String host, LocalDate startDate, LocalDate endDate, int free, String content, String filename, String filepath) {
         boolean freeBoolean;
         if(free == 0)
