@@ -26,6 +26,7 @@ public class Event {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Category category;    //종류
+
     private String title;
     private String location;
     private String host;    //주최자(단체명)
@@ -35,12 +36,18 @@ public class Event {
     private boolean free;
     private String content;
     @ElementCollection
-    private List<String> keywords;
+    private List<String> keywords;  //해시태그
     private String filename;//파일이름
     private String filepath;//파일경로
 
 
-    public static Event createEvent(EventRequestDto dto, User user, String filename, String filepath){
+    public static Event createEvent(EventRequestDto dto, User user){
+        boolean free;
+        if(dto.getFree() > 0)
+            free = true;
+        else
+            free=false;
+
         return new Event(
                 dto.getId(),
                 user,
@@ -51,11 +58,11 @@ public class Event {
                 LocalDate.now(),
                 dto.getStart_date(),
                 dto.getEnd_date(),
-                dto.getFree(),
+                free,
                 dto.getContent(),
                 dto.getKeywords(),
-                filename,
-                filepath
+                null,
+                null
         );
     }
 }

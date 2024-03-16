@@ -4,6 +4,7 @@ import ewha_hackathon.authentication.service.UserService;
 import ewha_hackathon.domain.User;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -74,8 +75,8 @@ public class UserController {
                             HttpSession session) {
         User user = userService.loginUser(email, password);
         if (user != null) {
-            session.setAttribute("username", user.getUsername());
-            return "redirect:/main";
+            session.setAttribute("user", user);
+            return "eventRegister";
         } else {
             return "redirect:/login?error";
         }
