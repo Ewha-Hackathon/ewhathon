@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -15,7 +16,7 @@ import java.time.LocalDate;
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long event_id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -23,7 +24,6 @@ public class Event {
     
     @Column(nullable = false)
     private String category;    //종류(공연,작품,연구..)
-    private String genre;   //장르(국악,댄스,밴드..)
     private String title;
     private String location;
     private String host;    //주최자(단체명)
@@ -31,16 +31,18 @@ public class Event {
     private LocalDate start_date;
     private LocalDate end_date;
     private boolean free;
-    private String content;
+    private String explain;
+    @ElementCollection
+    private List<String> keywords;
     private String filename;//파일이름
     private String filepath;//파일경로
+
 
     public static Event createEvent(EventRequestDto dto, User user, String filename, String filepath){
         return new Event(
                 dto.getId(),
                 user,
                 dto.getCategory(),
-                dto.getGenre(),
                 dto.getTitle(),
                 dto.getLocation(),
                 dto.getHost(),
@@ -48,7 +50,8 @@ public class Event {
                 dto.getStart_date(),
                 dto.getEnd_date(),
                 dto.getFree(),
-                dto.getContent(),
+                dto.getExplain(),
+                dto.getKeywords(),
                 filename,
                 filepath
         );
