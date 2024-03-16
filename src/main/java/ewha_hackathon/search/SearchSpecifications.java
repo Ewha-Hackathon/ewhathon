@@ -24,7 +24,7 @@ public class SearchSpecifications {
         return (root, query, criteriaBuilder) -> criteriaBuilder.between(root.get("start_date"), start, end);
     }
 
-    public static Specification<Event> isFree(boolean free) {
+    public static Specification<Event> isFree(Boolean free) {
         return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("free"), free);
     }
 

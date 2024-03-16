@@ -12,9 +12,11 @@
     <li th:each="event : ${events}">
       <p th:text="'Title: ' + ${event.title}"></p>
       <p th:text="'Category: ' + ${event.category}"></p>
-      <p th:text="'Dates: ' + ${event.startDate} + ' - ' + ${event.endDate}"></p>
+      <p th:text="'Dates: ' + ${event.start_date} + ' - ' + ${event.end_date}"></p>
       <p th:text="'Free: ' + (${event.free} ? 'Yes' : 'No')"></p>
       <p th:text="'Keywords: ' + ${event.keywords}"></p>
+      <img th:src="${event.filepath}">
+
     </li>
   </ul>
 </div>
