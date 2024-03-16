@@ -5,7 +5,7 @@
   <title>Keywords Suggestion</title>
 </head>
 <body>
-<form th:action="/suggestKeywords/${eventId}" th:method="post">
+<form th:action="@{/submitKeywords/${eventId}}" th:method="post">
   <div th:each="keyword, iterStat : ${keywords}">
     <input type="checkbox" th:value="${keyword}" th:name="selectedKeywords"/>
     <label th:text="${keyword}"></label><br/>
