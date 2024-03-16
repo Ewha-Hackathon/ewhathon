@@ -22,7 +22,7 @@ public class Event {
     private User user_id;   //게시물 작성자
     
     @Column(nullable = false)
-    private String type;    //종류(공연,작품,연구..)
+    private String category;    //종류(공연,작품,연구..)
     private String genre;   //장르(국악,댄스,밴드..)
     private String title;
     private String location;
@@ -30,13 +30,16 @@ public class Event {
     private LocalDate post_date;    //올린 날짜
     private LocalDate start_date;
     private LocalDate end_date;
-    private Boolean free;
+    private boolean free;
+    private String content;
+    private String filename;//파일이름
+    private String filepath;//파일경로
 
-    public static Event createEvent(EventRequestDto dto, User user){
+    public static Event createEvent(EventRequestDto dto, User user, String filename, String filepath){
         return new Event(
                 dto.getId(),
                 user,
-                dto.getType(),
+                dto.getCategory(),
                 dto.getGenre(),
                 dto.getTitle(),
                 dto.getLocation(),
@@ -44,7 +47,10 @@ public class Event {
                 LocalDate.now(),
                 dto.getStart_date(),
                 dto.getEnd_date(),
-                dto.getFree()
+                dto.getFree(),
+                dto.getContent(),
+                filename,
+                filepath
         );
     }
 }

@@ -16,7 +16,7 @@ public class EventController {
     private EventService eventService;
 
     @PostMapping("/create")
-    public ResponseEntity<String> createEvent(@RequestBody EventRequestDto dto, HttpSession session){
+    public ResponseEntity<String> createEvent(@RequestBody EventRequestDto dto, HttpSession session) throws Exception {
         User user = (User)session.getAttribute("user");
         if (user == null)
             throw new IllegalStateException("세션 없음");
