@@ -1,5 +1,6 @@
 package ewha_hackathon.event.DTO;
 
+import ewha_hackathon.domain.Category;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
@@ -10,7 +11,7 @@ import java.util.List;
 @Data
 public class EventRequestDto {
     private Long id;
-    private String category;    //종류(공연,작품,연구..)
+    private Category category;    //종류(공연,작품,연구..)
     private String title;
     private String location;
     private String host;    //주최자(단체명)
