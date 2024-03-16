@@ -5,6 +5,7 @@ import ewha_hackathon.home.DTO.HomeResponseDto;
 import ewha_hackathon.home.service.HomeService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,12 +17,14 @@ public class HomeController {
     private final HomeService homeService;
 
     @GetMapping()
-    public HomeResponseDto getHomeInfo(HttpSession session) throws Exception {
+    public void getHomeInfo(HttpSession session, Model model) {
         User user = (User)session.getAttribute("user");
         if (user == null)
             throw new IllegalStateException("세션 없음");
 
-        return homeService.getHomeInfo(user);
+        model.addAttribute("currentUser", user);
+        model.addAttribute("HomeResponseDto", homeService.getHomeInfo(user));
+        //return homeService.getHomeInfo(user);
     }
 
 }
