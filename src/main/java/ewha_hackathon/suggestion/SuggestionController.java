@@ -1,4 +1,4 @@
-package suggestion;
+package ewha_hackathon.suggestion;
 
 import ewha_hackathon.domain.Suggestion;
 import org.springframework.beans.factory.annotation.Autowired;
