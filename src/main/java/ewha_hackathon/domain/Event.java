@@ -31,7 +31,7 @@ public class Event {
     private LocalDate start_date;
     private LocalDate end_date;
     private boolean free;
-    private String explain;
+    private String content;
     @ElementCollection
     private List<String> keywords;
     private String filename;//파일이름
@@ -50,7 +50,7 @@ public class Event {
                 dto.getStart_date(),
                 dto.getEnd_date(),
                 dto.getFree(),
-                dto.getExplain(),
+                dto.getContent(),
                 dto.getKeywords(),
                 filename,
                 filepath
