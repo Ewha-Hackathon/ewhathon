@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -38,7 +39,11 @@ public class Event {
     private List<String> keywords;  //해시태그
     private String filename;//파일이름
     private String filepath;//파일경로
-    private int count;  //좋아요 개수
+
+    @ColumnDefault("0")
+    private Integer heart_count;
+    @ColumnDefault("0")
+    private Integer rsvp_count;
 
     public static Event createEvent(User user, Category category, String title, String location, String host, LocalDate startDate, LocalDate endDate, int free, String content, String filename, String filepath) {
         boolean freeBoolean;
@@ -62,7 +67,7 @@ public class Event {
                 null,
                 filename,
                 filepath,
-                0   //초기값 0 지정
-        );
+                0,
+                0);
     }
 }
