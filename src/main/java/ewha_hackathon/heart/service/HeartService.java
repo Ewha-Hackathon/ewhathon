@@ -3,7 +3,7 @@ package ewha_hackathon.heart.service;
 import ewha_hackathon.domain.Event;
 import ewha_hackathon.domain.Heart;
 import ewha_hackathon.domain.User;
-import ewha_hackathon.heart.DTO.HeartRequestDTO;
+import ewha_hackathon.heart.DTO.HeartRequestDto;
 import ewha_hackathon.repository.EventRepository;
 import ewha_hackathon.repository.HeartRepository;
 import ewha_hackathon.repository.UserRepository;
@@ -21,7 +21,7 @@ public class HeartService {
     private final EventRepository eventRepository;
 
     @Transactional
-    public void insert(HeartRequestDTO heartRequestDTO) throws Exception {
+    public void insert(HeartRequestDto heartRequestDTO) throws Exception {
         User user = userRepository.findById(heartRequestDTO.getUser_id())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,"Could not found member id"));
 
@@ -40,10 +40,10 @@ public class HeartService {
                 .build();
 
         heartRepository.save(heart);
-        eventRepository.updateCount(event,true);
+        eventRepository.updateHeartCount(event,true);
     }
     @Transactional
-    public void delete(HeartRequestDTO heartRequestDTO) {
+    public void delete(HeartRequestDto heartRequestDTO) {
         User user = userRepository.findById(heartRequestDTO.getUser_id())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,"Could not found member id"));
 
@@ -54,7 +54,7 @@ public class HeartService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,"Could not found heart id"));
 
         heartRepository.delete(heart);
-        eventRepository.updateCount(event,false);
+        eventRepository.updateHeartCount(event,false);
     }
 
 }

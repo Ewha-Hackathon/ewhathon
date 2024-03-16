@@ -1,6 +1,6 @@
 package ewha_hackathon.heart.controller;
 
-import ewha_hackathon.heart.DTO.HeartRequestDTO;
+import ewha_hackathon.heart.DTO.HeartRequestDto;
 import ewha_hackathon.heart.service.HeartService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,21 +17,15 @@ public class HeartController {
     private final HeartService heartService;
 
     @PostMapping
-    public ResponseEntity<?> insert(@RequestBody HeartRequestDTO heartRequestDTO) throws Exception {
+    public ResponseEntity<?> insert(@RequestBody HeartRequestDto heartRequestDTO) throws Exception {
         heartService.insert(heartRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @DeleteMapping
-    public ResponseEntity<?> delete(@RequestBody HeartRequestDTO heartRequestDTO) {
+    public ResponseEntity<?> delete(@RequestBody HeartRequestDto heartRequestDTO) {
         heartService.delete(heartRequestDTO);
         return ResponseEntity.ok().build();
     }
 
-
-    //rsvp 발급하기
-    @PostMapping("/rsvp/")
-    public void RsvpEvent(@PathVariable Long event_id) {
-
-    }
 }

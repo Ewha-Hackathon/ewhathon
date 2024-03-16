@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -39,6 +40,11 @@ public class Event {
     private String filename;//파일이름
     private String filepath;//파일경로
 
+    @ColumnDefault("0")
+    private Integer heart_count;
+
+    @ColumnDefault("0")
+    private Integer rsvp_count;
 
     public static Event createEvent(EventRequestDto dto, User user, String filename, String filepath){
         return new Event(
@@ -55,7 +61,9 @@ public class Event {
                 dto.getContent(),
                 dto.getKeywords(),
                 filename,
-                filepath
+                filepath,
+                0,
+                0
         );
     }
 }
