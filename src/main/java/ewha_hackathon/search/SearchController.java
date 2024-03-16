@@ -24,14 +24,14 @@ public class SearchController {
         return "search";
     }
 
-    @GetMapping("/searchResults")
+    @GetMapping("/searchResult")
     public String showSearchResults(
-            @RequestParam(required = false) String title,
-            @RequestParam(required = false) Category category,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
-            @RequestParam(required = false) Boolean free,
-            @RequestParam(required = false) List<String> keywords,
+            @RequestParam(required = false, name="title") String title,
+            @RequestParam(required = false, name="category") Category category,
+            @RequestParam(required = false, name="startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @RequestParam(required = false, name="endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
+            @RequestParam(required = false, name="free") Boolean free,
+            @RequestParam(required = false, name="keywords") List<String> keywords,
             Model model) {
 
         List<String> keywordList = new ArrayList<>();
