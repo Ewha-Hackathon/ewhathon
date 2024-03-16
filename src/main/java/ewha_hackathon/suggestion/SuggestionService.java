@@ -29,6 +29,12 @@ public class SuggestionService {
     @Autowired
     private SuggestionRepository suggestionRepository;
 
+    public List<String> suggestKeywords(Long eventId) {
+        Event event = eventRepository.findById(eventId)
+                .orElseThrow(() -> new IllegalArgumentException("Event not found"));
+        return fetchSuggestedKeywords(eventId, event.getContent());
+    }
+
     public List<String> fetchSuggestedKeywords(Long eventId, String description) {
         // Flask 서버의 URL
         String url = "http://localhost:5000/extractKeywords";
@@ -43,36 +49,29 @@ public class SuggestionService {
         System.out.println(keywords);
 
         saveKeywords(eventId, keywords);
-
         return keywords;
-    }
-
-    public List<String> suggestKeywords(Long eventId) {
-        Event event = eventRepository.findById(eventId)
-                .orElseThrow(() -> new IllegalArgumentException("Event not found"));
-        return fetchSuggestedKeywords(eventId, event.getContent());
     }
 
     @Transactional
     public void saveKeywords(Long eventId, List<String> keywords) {
         Event event = eventRepository.findById(eventId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 event_id 없음: " + eventId));
-        Suggestion suggestion = new Suggestion();
+        Suggestion suggestion = new Suggestion(String.join(",", keywords));
         suggestion.setEvent(event);
-        suggestion.setSuggestedKeywords(String.join(",", keywords));
         suggestionRepository.save(suggestion);
+        System.out.println("Event ID: " + eventId + ", Suggested Keywords: " + String.join(",", keywords));
     }
 
-    @Transactional
-    public void updateEventKeywords(Long eventId, List<String> keywords) {
-        try {
-            Event event = eventRepository.findById(eventId)
-                    .orElseThrow(() -> new IllegalArgumentException("해당 event_id 없음: " + eventId));
-            Suggestion suggestion = new Suggestion();
-            suggestion.setEvent(event);
-            suggestion.setSuggestedKeywords(String.join(",", keywords));
-            suggestionRepository.save(suggestion);
-        } catch (Exception e) {
-        }
-    }
+//    @Transactional
+//    public void updateEventKeywords(Long eventId, List<String> keywords) {
+//        try {
+//            Event event = eventRepository.findById(eventId)
+//                    .orElseThrow(() -> new IllegalArgumentException("해당 event_id 없음: " + eventId));
+//            Suggestion suggestion = new Suggestion();
+//            suggestion.setEvent(event);
+//            suggestion.setSuggestedKeywords(String.join(",", keywords));
+//            suggestionRepository.save(suggestion);
+//        } catch (Exception e) {
+//        }
+//    }
 }

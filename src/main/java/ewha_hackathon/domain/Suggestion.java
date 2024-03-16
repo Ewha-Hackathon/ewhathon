@@ -20,6 +20,7 @@ public class Suggestion {
         this.event = event;
     }
 
-    public void setSuggestedKeywords(String join) {
+    public Suggestion(String suggestedKeywords) {
+        this.suggestedKeywords = suggestedKeywords;
     }
 }

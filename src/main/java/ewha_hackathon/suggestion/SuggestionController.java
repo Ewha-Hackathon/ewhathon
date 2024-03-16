@@ -33,11 +33,11 @@ public class SuggestionController {
 //        return ResponseEntity.ok(keywords);
 //    }
 
-    @PostMapping("/suggestKeywords/{eventId}")
-    public String submitKeywords(@RequestParam("eventId") Long eventId,
-                                 @RequestParam("selectedKeywords") List<String> selectedKeywords,
-                                 RedirectAttributes redirectAttributes) {
-        suggestionService.updateEventKeywords(eventId, selectedKeywords);
-        return "redirect:/main";
-    }
+//    @PostMapping("/suggestKeywords/{eventId}")
+//    public String submitKeywords(@RequestParam("eventId") Long eventId,
+//                                 @RequestParam("selectedKeywords") List<String> selectedKeywords,
+//                                 RedirectAttributes redirectAttributes) {
+//        suggestionService.updateEventKeywords(eventId, selectedKeywords);
+//        return "redirect:/main";
+//    }
 }
