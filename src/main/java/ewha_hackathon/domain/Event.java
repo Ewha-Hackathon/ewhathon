@@ -23,8 +23,10 @@ public class Event {
     @JoinColumn(name = "user_id")
     private User user_id;   //게시물 작성자
     
-    @Column
-    private String category;    //종류(공연,작품,연구..)
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Category category;    //종류
+
     private String title;
     private String location;
     private String host;    //주최자(단체명)

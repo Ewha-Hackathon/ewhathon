@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>searchResult</title>
+</head>
+<body>
+<h1>검색 결과</h1>
+<div th:if="${!events.isEmpty()}">
+  <ul>
+    <li th:each="event : ${events}">
+      <p th:text="'Title: ' + ${event.title}"></p>
+      <p th:text="'Category: ' + ${event.category}"></p>
+      <p th:text="'Dates: ' + ${event.start_date} + ' - ' + ${event.end_date}"></p>
+      <p th:text="'Free: ' + (${event.free} ? 'Yes' : 'No')"></p>
+      <p th:text="'Keywords: ' + ${event.keywords}"></p>
+      <img th:src="${event.filepath}">
+
+    </li>
+  </ul>
+</div>
+<div th:if="${events.isEmpty()}">
+  <p>일치하는 값이 없습니다.</p>
+</div>
+<a href="/search">재검색</a>
+</body>
+</html>

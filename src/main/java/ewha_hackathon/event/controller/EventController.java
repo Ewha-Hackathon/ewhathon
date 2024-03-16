@@ -2,6 +2,7 @@ package ewha_hackathon.event.controller;
 
 import ewha_hackathon.event.DTO.EventRequestDto;
 import ewha_hackathon.domain.User;
+import ewha_hackathon.event.DTO.EventResponseDto;
 import ewha_hackathon.event.service.EventService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,10 @@ public class EventController {
 
         eventService.createEvent(user, dto);
         return ResponseEntity.status(HttpStatus.OK).body("공연 정보 추가 완료");
+    }
+
+    @GetMapping("/detail/{event_id}")
+    public EventResponseDto showEvent(@PathVariable Long event_id) {
+        return eventService.showEventDetail(event_id);
     }
 }
