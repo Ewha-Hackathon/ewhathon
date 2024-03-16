@@ -23,7 +23,7 @@ public class Event {
     @JoinColumn(name = "user_id")
     private User user_id;   //게시물 작성자
     
-    @Column(nullable = false)
+    @Column
     private String category;    //종류(공연,작품,연구..)
     private String title;
     private String location;
@@ -34,12 +34,18 @@ public class Event {
     private boolean free;
     private String content;
     @ElementCollection
-    private List<String> keywords;
+    private List<String> keywords;  //해시태그
     private String filename;//파일이름
     private String filepath;//파일경로
 
 
-    public static Event createEvent(EventRequestDto dto, User user, String filename, String filepath){
+    public static Event createEvent(EventRequestDto dto, User user){
+        boolean free;
+        if(dto.getFree() > 0)
+            free = true;
+        else
+            free=false;
+
         return new Event(
                 dto.getId(),
                 user,
@@ -50,11 +56,11 @@ public class Event {
                 LocalDate.now(),
                 dto.getStart_date(),
                 dto.getEnd_date(),
-                dto.getFree(),
+                free,
                 dto.getContent(),
                 dto.getKeywords(),
-                filename,
-                filepath
+                null,
+                null
         );
     }
 }

@@ -20,8 +20,8 @@ public class EventService {
 
     @Transactional
     public void createEvent(User user, EventRequestDto dto) throws Exception{
-        File file = write(dto.getFile());
-        Event event = Event.createEvent(dto, user, file.getName(), "/files/"+file.getName());
+//        File file = write(dto.getFile());
+        Event event = Event.createEvent(dto, user);
         eventRepository.save(event);
     }
 

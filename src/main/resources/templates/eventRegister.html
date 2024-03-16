@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <form>
+    <input type="text" id="category" name="category" placeholder="종류(공연,작품,연구)" required>
+    <input type="text" id="title" name="title" placeholder="제목" required>
+    <input type="text" id="location" name="location" placeholder="위치" required>
+    <input type="text" id="host" name="host" placeholder="주최자" required>
+    <input type="date" id="start_date" name="start_date" placeholder="시작일" required>
+    <input type="date" id="end_date" name="end_date" placeholder="종료일" required>
+    <input type="text" id="free" name="free" placeholder="가격(유/무료)" required>
+    <textarea type="text" id="content" name="content" placeholder="내용" required></textarea>
+<!--    <input type="file" name="file" required>-->
+    <button type="button" id="button" >제출</button>
+  </form>
+</body>
+</html>
+
+<script>
+const submitBtn = document.getElementById("button");
+  submitBtn.addEventListener("click", function(){
+  const event = {
+      category: document.getElementById("category").value,
+      title: document.getElementById("title").value,
+      location: document.getElementById("location").value,
+      host: document.getElementById("host").value,
+      start_date: document.getElementById("start_date").value,
+      end_date: document.getElementById("end_date").value,
+      free: document.getElementById("free").value,
+      content: document.getElementById("content").value,
+    };
+    console.log(event);
+
+    const url = "/event/create";
+    fetch(url, {
+       method:"POST",
+       headers: {
+        "Content-Type":"application/json"
+       },
+       body:JSON.stringify(event)
+      })
+      .then(response => {
+        if (response.ok) {
+          console.log("Event created successfully!");
+          // 여기서 적절한 응답 처리를 수행할 수 있습니다.
+          const msg = (response.ok) ? "공연 등록." : "공연 등록 실패";
+          alert(msg);
+          window.location.reload();
+        } else {
+          console.error("Failed to create event.");
+          // 실패한 경우에 대한 처리를 여기에 추가할 수 있습니다.
+        }
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        // 에러가 발생한 경우에 대한 처리를 여기에 추가할 수 있습니다.
+      });
+  });
+</script>
+
