@@ -3,14 +3,16 @@ package ewha_hackathon.event.service;
 import ewha_hackathon.event.DTO.EventRequestDto;
 import ewha_hackathon.domain.Event;
 import ewha_hackathon.domain.User;
+import ewha_hackathon.event.DTO.EventResponseDto;
 import ewha_hackathon.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.UUID;
 
 @Service
@@ -37,5 +39,27 @@ public class EventService {
         file.transferTo(saveFile);
 
         return saveFile;
+    }
+
+
+    //이벤트 상세보기
+    public EventResponseDto showEventDetail(Long event_id) {
+
+        Event event = eventRepository.findById(event_id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,"잘못된 id입니다"));
+
+        return EventResponseDto.builder()
+                .event_id(event.getId())
+                .category(event.getCategory())
+                .title(event.getTitle())
+                .location(event.getLocation())
+                .host(event.getHost())
+                .start_date(event.getStart_date())
+                .end_date(event.getEnd_date())
+                .free(event.isFree())
+                .content(event.getContent())
+                .keywords(event.getKeywords())
+                .build();
+
     }
 }
