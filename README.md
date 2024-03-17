@@ -11,7 +11,7 @@
 ### 📚 domain package
 - **User**: 사용자의 정보와 관련된 엔티티. 속성: `username`, `email`, `password`.
 - **Category**: 행사의 다양한 분야(공연, 학술, 전시 등)를 정의하는 열거형.
-- **Event**: 행사 정보와 관련된 엔티티. 속성: `category`, `title`, `location`, `host`, `post_date`, `start_date`, `end_date`, `free`, `filepath`, `heart_count`, `rsvp_count`.
+- **Event**: 행사 정보와 관련된 엔티티. 속성: `category`, `title`, `location`, `host`, `post_date`, `start_date`, `end_date`, `free`, `filepath`, `heart_count`, `rsvp_count`, `selected_keywords`.
 - **Hashtag**: 행사의 분위기나 특성을 나타내는 해시태그를 정의하는 열거형.
 - **Heart**: 등록된 행사글에 대한 좋아요를 관리하는 엔티티. 연결: `user_id`, `event_id`.
 - **Rsvp**: 등록된 행사글에 대한 참석 여부를 관리하는 엔티티. 연결: `user_id`, `event_id`.
