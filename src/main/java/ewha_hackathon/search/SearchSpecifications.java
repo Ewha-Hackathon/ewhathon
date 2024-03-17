@@ -1,6 +1,7 @@
 package ewha_hackathon.search;
 
 import ewha_hackathon.domain.Category;
+import ewha_hackathon.domain.Hashtag;
 import org.springframework.data.jpa.domain.Specification;
 import ewha_hackathon.domain.Event;
 
@@ -28,11 +29,11 @@ public class SearchSpecifications {
         return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("free"), free);
     }
 
-    public static Specification<Event> hasKeywords(List<String> keywords) {
+    public static Specification<Event>hasKeywords(List<Hashtag> hashtags) {
         return (root, query, cb) -> {
             List<Predicate> predicates = new ArrayList<>();
-            for (String keyword : keywords) {
-                predicates.add(cb.isMember(keyword, root.get("keywords")));
+            for (Hashtag hashtag : hashtags) {
+                predicates.add(cb.isMember(hashtag, root.get("suggestedKeywords"))); // Use Enum directly
             }
             return cb.and(predicates.toArray(new Predicate[0]));
         };

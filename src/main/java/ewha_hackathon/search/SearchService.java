@@ -1,6 +1,7 @@
 package ewha_hackathon.search;
 
 import ewha_hackathon.domain.Category;
+import ewha_hackathon.domain.Hashtag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class SearchService {
     @Autowired
     private EventRepository eventRepository;
 
-    public List<Event> searchEvents(String title, Category category, LocalDate startDate, LocalDate endDate, Boolean free, List<String> keywords) {
+    public List<Event> searchEvents(String title, Category category, LocalDate startDate, LocalDate endDate, Boolean free, List<Hashtag> keywords) {
         Specification<Event> spec = Specification.where(null);
 
         if (title != null && !title.isEmpty()) {

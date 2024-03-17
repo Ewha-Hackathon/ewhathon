@@ -27,17 +27,10 @@ public class SuggestionController {
     }
 
 //    @GetMapping("/suggestKeywords/{eventId}")
-//    public ResponseEntity<List<String>> suggestKeywords(@PathVariable Long eventId) {
-//        Event event = eventService.findEventById(eventId);
-//        List<String> keywords = suggestionService.fetchSuggestedKeywords(event.getContent());
-//        return ResponseEntity.ok(keywords);
 //    }
 
 //    @PostMapping("/suggestKeywords/{eventId}")
-//    public String submitKeywords(@RequestParam("eventId") Long eventId,
-//                                 @RequestParam("selectedKeywords") List<String> selectedKeywords,
-//                                 RedirectAttributes redirectAttributes) {
-//        suggestionService.updateEventKeywords(eventId, selectedKeywords);
+//    public String submitKeywords()
 //        return "redirect:/main";
 //    }
 }
