@@ -21,11 +21,8 @@ public class HeartService {
     private final EventRepository eventRepository;
 
     @Transactional
-    public void insert(HeartRequestDto heartRequestDTO) throws Exception {
-        User user = userRepository.findById(heartRequestDTO.getUser_id())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,"Could not found member id"));
-
-        Event event = eventRepository.findById(heartRequestDTO.getEvent_id())
+    public void insert(Long event_id, User user) throws Exception {
+        Event event = eventRepository.findById(event_id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,"Could not found event id"));
 
         // 이미 좋아요되어있으면 에러 반환
@@ -43,11 +40,8 @@ public class HeartService {
         eventRepository.updateHeartCount(event,true);
     }
     @Transactional
-    public void delete(HeartRequestDto heartRequestDTO) {
-        User user = userRepository.findById(heartRequestDTO.getUser_id())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,"Could not found member id"));
-
-        Event event = eventRepository.findById(heartRequestDTO.getEvent_id())
+    public void delete(Long event_id, User user) {
+        Event event = eventRepository.findById(event_id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,"Could not found event id"));
 
         Heart heart = heartRepository.findByUserAndEvent(user, event)

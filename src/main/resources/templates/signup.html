@@ -1,42 +1,10 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-<!--    <title>Signup</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<div class="container">-->
-<!--    <h2>회원가입</h2>-->
-<!--    <form id="signupForm" action="/signup" method="post">-->
-<!--        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
-
-<!--        <div class="form-group">-->
-<!--            <label for="username">사용자이름</label>-->
-<!--            <input type="text" id="username" name="username" placeholder="닉네임" required>-->
-<!--        </div>-->
-
-<!--        <div class="form-group">-->
-<!--            <label for="email">이메일 주소</label>-->
-<!--            <input type="email" id="email" name="email" placeholder="이메일 주소" required>-->
-<!--            <button type="button" class="check-btn" id="checkEmailBtn" onclick="checkEmail()">중복확인</button>-->
-<!--        </div>-->
-<!--        <span id="emailResult" class="result-text"></span>-->
-
-<!--        <div class="form-group">-->
-<!--            <label for="password">비밀번호</label>-->
-<!--            <input type="password" id="password" name="password" placeholder="비밀번호" required>-->
-<!--        </div>-->
-<!--        <button type="submit" class="signup-btn" id="signupBtn" disabled>가입하기</button>-->
-<!--    </form>-->
-<!--</div>-->
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/signup.css" rel="stylesheet">
+    <script src="js/emailDuplicate.js"></script>
     <title>Do battle</title>
 </head>
 <body>
@@ -64,43 +32,11 @@
             <label>벗돋움의 개인정보 이용 방침에 동의합니다.</label>
             <input type="checkbox" required>
         </div>
-        <input type="submit" id="submit" value="회원가입">
+        <input type="submit" id="signupBtn" disabled value="회원가입">
     </form>
 </div>
 </body>
 </html>
 
-<script>
-// 이메일 중복 확인
-function checkEmail() {
-    var email = document.getElementById("email").value;
-    var resultSpan = document.getElementById("emailResult");
-    fetch('/checkEmail?email=' + email)
-        .then(response => response.json())
-        .then(data => {
-            if (data.toString() === "true" && (email.endsWith("@ewha.ac.kr") || email.endsWith("@ewhain.net"))) {
-                resultSpan.textContent = "사용 가능한 이메일";
-            } else if (data.toString() === "false") {
-                resultSpan.textContent = "이미 존재하는 계정";
-            } else {
-                resultSpan.textContent = "이화인 계정만 가능";
-            }
-            validateSignup();
-        });
-}
-// 회원가입 유효성 검사
-function validateSignup() {
-    var emailResultElement = document.getElementById("emailResult");
-    var emailResult = emailResultElement ? emailResultElement.textContent : null;
-    var signupBtn = document.getElementById("signupBtn");
-
-    if (emailResult === "사용 가능한 이메일") {
-        signupBtn.disabled = false;
-    } else {
-        signupBtn.disabled = true;
-    }
-}
-
-</script>
 </body>
 </html>

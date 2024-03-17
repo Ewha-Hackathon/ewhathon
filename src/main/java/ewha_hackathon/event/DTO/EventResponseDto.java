@@ -25,5 +25,5 @@ public class EventResponseDto {
     private String content;
     private List<String> keywords;
     //private MultipartFile file;
-
+    private boolean heart;
 }

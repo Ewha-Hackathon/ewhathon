@@ -1,0 +1,171 @@
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Sans+KR:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+  --color-green-1: #e6efce;
+  --color-green-2: #abbc86;
+  --color-green-3: #497248;
+
+  --color-yellow: #e7a517;
+  --color-beige: #ccbf9d;
+  --color-bg: #f7f6f2;
+  --color-txt: #292b26;
+
+  --transition: all 300ms ease;
+
+  --container-width-lg: 84%;
+  --container-width-md: 92%;
+  --form-width: 50%;
+
+  --radius-1: 0.3rem;
+  --radius-2: 0.6rem;
+  --radius-3: 1rem;
+  --radius-4: 2rem;
+
+  --font-body1: 1rem;
+  --font-body2: 0.6rem;
+
+  /* font-size: 20px; */
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  font-family: "Poppins", "Nanum+Gothic";
+  background: var(--color-bg);
+  font-size: 1.5rem;
+  line-height: 1.6rem;
+  color: var(--color-txt);
+}
+
+img {
+  display: block;
+  object-fit: cover;
+  width: 100%;
+}
+
+.nav-icon {
+  width: 1rem;
+  display: block;
+}
+
+a {
+  color: var(--color-green-2);
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  padding-left: 2rem;
+  height: auto;
+}
+
+hr {
+  color: var(--color-beige);
+}
+
+section {
+  margin-top: 2rem;
+}
+
+.container {
+  width: var(--container-width-lg);
+  margin-inline: auto;
+}
+
+.btn {
+  display: inline-block;
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-2);
+  background-color: var(--color-green-3);
+  font-weight: 500;
+}
+
+/*================================nav bar=================================*/
+
+nav > div {
+  /* 수평정렬, 5개의 button을 각각 25% width만큼 할당 */
+  text-align: center;
+  float: left;
+  width: 25%;
+  height: 3rem;
+
+  /* 세로길이 설정 */
+  line-height: 10%;
+  background-color: var(--color-bg);
+}
+
+.navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3rem;
+}
+
+/* 하단 네비바의 메뉴를 눌렀을 때 색상 변경*/
+.active {
+  color: var(--color-green-3);
+}
+
+/* ====================태그=====================*/
+
+.tag {
+  padding: 0.2rem 0.8rem 0.2rem 0.8rem;
+  color: var(--color-bg);
+  background-color: var(--color-yellow);
+  border-color: var(--color-yellow);
+  border-radius: 2rem;
+  font-size: 1rem;
+  margin-left: 0.1rem;
+  margin-right: 0.1rem;
+  text-align: center;
+}
+
+.tag-container {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* ====================버튼=====================*/
+
+.button_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+}
+
+.oval_button {
+  text-align: center;
+  font-size: 20px;
+  border-radius: 37.5px;
+  border: none;
+
+  height: 60px;
+  background: var(--color-green-1);
+
+  bottom: 20px;
+  /* box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2); */
+}
+
+.like_btn {
+  background-color: var(--color-green-1);
+  border: none;
+  font-size: 2rem;
+  padding: 1rem 1.5rem 1rem 1.5rem;
+  width: 20%;
+  border-radius: 20rem;
+}
+
+.rsvp_btn {
+  background-color: var(--color-green-1);
+  border: none;
+  color: var(--color-green-3);
+  font-size: 2rem;
+  padding: 1rem 1.5rem 1rem 1.5rem;
+  width: 70%;
+  border-radius: 20rem;
+}

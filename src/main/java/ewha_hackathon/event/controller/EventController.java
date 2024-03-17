@@ -10,13 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/event")
 public class EventController {
     @Autowired
@@ -41,8 +43,14 @@ public class EventController {
         return ResponseEntity.status(HttpStatus.OK).body("공연 정보 추가 완료");
     }
 
-    @GetMapping("/detail/{event_id}")
-    public EventResponseDto showEvent(@PathVariable Long event_id) {
-        return eventService.showEventDetail(event_id);
+    @GetMapping("/detail")
+    public String showEvent(@RequestParam Long event_id, HttpSession session, Model model) {
+        User user = (User)session.getAttribute("user");
+        if (user == null)
+            throw new IllegalStateException("세션 없음");
+
+        EventResponseDto dto = eventService.showEventDetail(event_id, user);
+        model.addAttribute("dto", dto);
+        return "postDetail";
     }
 }
