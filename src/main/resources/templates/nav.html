@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/c817d51768.js" crossorigin="anonymous"></script>
+    <style>
+        #navbar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            background: #FEFDFB;
+            z-index: 1000;
+            /* 경계확인용 임시 선 */
+            border-top: 1px solid #C3D1A5;
+        }
+        #navbar a {
+            color: #C3D1A5;
+            text-decoration: none;
+            font-size: 26px;
+        }
+        #navbar a.active {
+            color: #497248;
+        }
+    </style>
+</head>
+<body>
+
+<div id="navbar">
+    <a href="#" title="Home" class="nav-item"><i class="fa fa-home"></i></a>
+    <a href="#" title="Add" class="nav-item"><i class="fa fa-plus"></i></a>
+    <a href="#" title="Search" class="nav-item"><i class="fa fa-search"></i></a>
+    <a href="#" title="User" class="nav-item"><i class="fa fa-user"></i></a>
+</div>
+
+<script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const navItems = document.querySelectorAll('.nav-item');
+
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+
+                    navItems.forEach(icon => icon.classList.remove('active'));
+
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

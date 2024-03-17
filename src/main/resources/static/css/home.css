@@ -1,0 +1,39 @@
+* {
+  margin: 0;
+}
+
+h1 {
+  font-size: 2rem;
+  color: var(--color-bg);
+  font-weight: 700;
+  padding: 1rem;
+  padding-top: 5rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-bg);
+  padding-left: 2rem;
+}
+
+.top-grn {
+  width: 100vw;
+  height: 40vh;
+  background: #497248;
+  border-radius: 0px 0px 30px 30px;
+}
+
+.popular-wrapper {
+  padding: 2rem;
+  display: flex;
+  overflow: scroll;
+  /* 가로 스크롤 */
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.upcoming-wrapper {
+  padding: 2rem;
+  display: box;
+}

@@ -24,7 +24,7 @@
   --font-body1: 1rem;
   --font-body2: 0.6rem;
 
-  /* font-size: 20px; */
+  line-height: 1.1rem;
 }
 
 * {
@@ -33,7 +33,6 @@
 
 body {
   font-family: "Poppins", "Nanum+Gothic";
-  background: var(--color-bg);
   font-size: 1.5rem;
   line-height: 1.6rem;
   color: var(--color-txt);
@@ -145,7 +144,7 @@ nav > div {
   border: none;
 
   height: 60px;
-  background: var(--color-green-1);
+  background: grey;
 
   bottom: 20px;
   /* box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2); */

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>new post</title>
+  <link rel="stylesheet" href="css/part.css" />
+  <link rel="stylesheet" href="css/part2.css" />
+  <link
+          rel="stylesheet"
+          href="css/style.css"
+  />
+  <link rel="stylesheet" href="css/home.css" />
+  <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
+  />
+  <script
+          src="https://kit.fontawesome.com/c817d51768.js"
+          crossorigin="anonymous"
+  ></script>
+  <script src="js/changePage.js"></script>
+</head>
+<body>
+<div class="top-grn">
+  <h1>
+    안녕하세요 <span style="color: var(--color-yellow)" th:text="${HomeResponseDto.user_name}">{userName}</span>!
+  </h1>
+
+  <br />
+  <br />
+  <h2>현재 인기있는 벗돋움</h2>
+
+  <div class="popular-wrapper">
+    <div th:each="event : ${HomeResponseDto.popularEvents}" th:id="${event.id}" class="part" onclick="changePage(this)">
+      <img src="image/example2.jpg" />
+      <div class="part-content">
+        <div>
+          <p th:text="${event.title}">별의 회고록</p>
+          <i class="fa-regular fa-heart" style="color: #e7a517"></i>
+        </div>
+        <div>
+          <i class="fa-solid fa-calendar fa-sm" style="color: #497248"></i>
+          <p th:text="${event.start_date} +'~'+${event.end_date}">05.02~09.03</p>
+        </div>
+        <div>
+          <i class="fa-solid fa-location-dot" style="color: #497248"></i>
+          <p th:text="${event.location}">이화여대 아산공학관 B1</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <br />
+  <h2 style="color: var(--color-green-3)">다가오는 벗돋움</h2>
+  <div class="upcoming-wrapper">
+    <div th:each="event : ${HomeResponseDto.latestEvents}" th:id="${event.id}" onclick="changePage(this)" class="part2">
+      <img src="image/example2.jpg" />
+      <div>
+        <p th:text="${event.category}">연극</p>
+        <p th:text="${event.title}">별의 회고록</p>
+        <div>
+          <i class="fa-solid fa-calendar fa-sm" style="color: #497248"></i>
+          <p th:text="${event.start_date} +'~'+${event.end_date}">05.02~09.03</p>
+        </div>
+        <div class="tag-container">
+          <span class="tag">tag tag</span>
+          <span class="tag">tag</span>
+        </div>
+      </div>
+    </div>
+  <br />
+</div>
+
+<div id="nav-placeholder"></div>
+
+<script>
+      fetch('nav.html')
+        .then(response => response.text())
+        .then(html => {
+          document.getElementById('nav-placeholder').innerHTML = html;
+        })
+        .catch(err => {
+          console.warn(err);
+        });
+    </script>
+
+</body>
+</html>
