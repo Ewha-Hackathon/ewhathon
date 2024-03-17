@@ -9,9 +9,18 @@ public class Suggestion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "event_id")
-    private Long eventId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "event_id")
+    private Event event;
 
     @Column(name = "suggested_keywords", length = 500)
     private String suggestedKeywords;
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
+    public Suggestion(String suggestedKeywords) {
+        this.suggestedKeywords = suggestedKeywords;
+    }
 }

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Keywords Suggestion</title>
+</head>
+<body>
+<form th:action="@{/submitKeywords/${eventId}}" th:method="post">
+  <div th:each="keyword, iterStat : ${keywords}">
+    <input type="checkbox" th:value="${keyword}" th:name="selectedKeywords"/>
+    <label th:text="${keyword}"></label><br/>
+  </div>
+  <input type="hidden" th:value="${eventId}" th:name="eventId"/>
+  <button type="submit">키워드 등록</button>
+</form>
+</body>
+</html>

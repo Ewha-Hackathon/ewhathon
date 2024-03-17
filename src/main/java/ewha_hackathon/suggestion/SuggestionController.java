@@ -1,25 +1,39 @@
 package ewha_hackathon.suggestion;
 
-import ewha_hackathon.domain.Suggestion;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-@RestController
-@RequestMapping("/api/suggestion")
+import ewha_hackathon.event.service.EventService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+@Controller
 public class SuggestionController {
 
-    private final SuggestionService suggestionService;
+    @Autowired
+    private SuggestionService suggestionService;
 
     @Autowired
-    public SuggestionController(SuggestionService suggestionService) {
-        this.suggestionService = suggestionService;
+    private EventService eventService;
+
+    @GetMapping("/keywordsRegister/{eventId}")
+    public String showKeywordRegisterPage(@PathVariable("eventId") Long eventId, Model model) {
+        model.addAttribute("eventId", eventId);
+        return "keywordsRegister";
     }
 
-    @GetMapping
-    public List<Suggestion> getAllSuggestions() {
-        return suggestionService.findAll();
-    }
+//    @GetMapping("/suggestKeywords/{eventId}")
+//    public ResponseEntity<List<String>> suggestKeywords(@PathVariable Long eventId) {
+//        Event event = eventService.findEventById(eventId);
+//        List<String> keywords = suggestionService.fetchSuggestedKeywords(event.getContent());
+//        return ResponseEntity.ok(keywords);
+//    }
+
+//    @PostMapping("/suggestKeywords/{eventId}")
+//    public String submitKeywords(@RequestParam("eventId") Long eventId,
+//                                 @RequestParam("selectedKeywords") List<String> selectedKeywords,
+//                                 RedirectAttributes redirectAttributes) {
+//        suggestionService.updateEventKeywords(eventId, selectedKeywords);
+//        return "redirect:/main";
+//    }
 }
