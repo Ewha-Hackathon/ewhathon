@@ -15,9 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -81,5 +79,12 @@ public class SuggestionService {
         System.out.println(joinedKeywords);
         eventRepository.save(event);
     }
+
+    public List<String> getSuggestedKeywords(Long eventId) {
+        return suggestionRepository.findByEventId(eventId)
+                .map(suggestion -> Arrays.asList(suggestion.getSuggestedKeywords().split(",")))
+                .orElse(Collections.emptyList());
+    }
+
 
 }

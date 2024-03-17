@@ -23,9 +23,16 @@ public class Suggestion {
         this.event = event;
     }
 
+    protected Suggestion() {
+    }
+
     public Suggestion(List<Hashtag> suggestedKeywords) {
         this.suggestedKeywords = suggestedKeywords.stream()
                 .map(Enum::name)
                 .collect(Collectors.joining(","));
+    }
+
+    public String getSuggestedKeywords() {
+        return suggestedKeywords;
     }
 }
