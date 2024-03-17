@@ -1,0 +1,107 @@
+body{
+  background-color:  #ABBC86;
+  margin: 0;
+}
+
+/*상단바*/
+#signup-top{
+  background-color:  #F7F6F2;
+  width: 100%;
+  height: 220px;
+  /* position:relative; */
+}
+
+#menu{
+  position: absolute;
+  top: 75px;
+  left: 50%;
+  margin-left:-76px;
+  margin-top:-13px;
+}
+
+/*하단*/
+#signup-bottom{
+  margin-top: -40px; /*-마진 값으로 둥근부분 보이도록!!!!*/
+  background-color: #ABBC86;
+  width: 100%;
+  padding-top: 30px;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+}
+
+#signup-write{
+  color: #497248;
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  padding-bottom: 20px;
+  margin:10px;
+}
+
+#getInform{
+  display:flex;
+  flex-direction : column;
+  margin: 0px 40px;
+}
+
+#getInform > input, button{
+  margin-top: 15px;
+  height: 50px;
+}
+
+#getInform > input{
+  border: 1px gray solid;
+  border-radius: 10px;
+  padding-left: 20px;
+  font-size: 16px;
+  height:56px;
+}
+
+#battle-date, #battle-categ{
+  padding-right: 20px;
+}
+
+#signupBtn{
+  border: none;
+  background-color: #497248;
+  border-radius: 15px;
+  color:#FFF7E8;
+  height: 65px;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  margin-top: 50px;
+}
+
+#battle-pwre{
+  margin-bottom: 20px;
+}
+
+.agree{
+  margin-top: 10px;
+  font-size:14px;
+}
+
+.agree > label{
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/*이메일 중복확인 부분*/
+.check-div{
+  margin-top:-8px;
+}
+.check-btn{
+  border-radius: 10px;
+  padding:0px 15px;
+  height:30px;
+  border:none;
+  background-color: #497248;
+  color:#FFF7E8;
+}
+.result-text{
+  margin-top: 15px;
+  text-align: center;
+  flex-grow: 1;
+  vertical-align: middle;
+}

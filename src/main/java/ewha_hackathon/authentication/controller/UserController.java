@@ -76,7 +76,7 @@ public class UserController {
         User user = userService.loginUser(email, password);
         if (user != null) {
             session.setAttribute("user", user);
-            return "eventRegister";
+            return "redirect:/home";
         } else {
             return "redirect:/login?error";
         }

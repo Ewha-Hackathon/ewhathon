@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Post-detail</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <script src="https://kit.fontawesome.com/c817d51768.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../css/alt-header.css"/>
+  <link rel="stylesheet" href="../css/post_detail.css"/>
+</head>
+<body>
+
+<div>
+  <img src="../image/21d8cd3440e76f0fa46893d077f7ec83.jpg"/>
+</div>
+<div class="post-box">
+  <div class="post-content">
+    <div class="content">
+      <h2 th:text="${dto.category}">category</h2>
+      <h1>title</h1>
+    </div>
+    <div class="content">
+      <ul>
+        <li th:text="${dto.location}" class="li-location">location</li>
+        <li th:text="${dto.start_date} + '~' + ${dto.end_date}" class="li-time">time</li>
+        <li th:text="${dto.host}" class="li-host">host</li>
+        <li th:if="${dto.free}" class="li-free" th:text="'무료'">free</li>
+        <li th:if="${!dto.free}" class="li-free" th:text="'유료'">free</li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <h2>상세설명</h2>
+      <p th:text="${dto.content}">내용</p>
+      <div class="tag-container">
+        <span class="tag">tag tag</span>
+        <span class="tag">tag</span>
+        <span class="tag">tag tag</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="button_container">
+    <button th:if="${dto.heart}" class="oval_button" type="button" onclick="like_off()"><img src="../image/like_on.svg" class="like"/></button>
+    <button th:if="${!dto.heart}" class="oval_button" type="button" onclick="like_on()"><img src="../image/like_off.svg" class="like"/></button>
+    <button class="oval_button" type="button">자리맡기</button>
+  </div>
+</div>
+</body>
+
+<script th:inline="javascript">
+    let id = /*[[${dto.event_id}]]*/;
+    console.log(id);
+  </script>
+<script src="../js/postDetail.js"></script>
+
+</html>

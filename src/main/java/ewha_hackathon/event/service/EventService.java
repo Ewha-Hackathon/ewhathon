@@ -1,11 +1,13 @@
 package ewha_hackathon.event.service;
 
 import ewha_hackathon.domain.Category;
+import ewha_hackathon.domain.Heart;
 import ewha_hackathon.event.DTO.EventRequestDto;
 import ewha_hackathon.domain.Event;
 import ewha_hackathon.domain.User;
 import ewha_hackathon.event.DTO.EventResponseDto;
 import ewha_hackathon.repository.EventRepository;
+import ewha_hackathon.repository.HeartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -15,12 +17,15 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.io.File;
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class EventService {
     @Autowired
     private EventRepository eventRepository;
+    @Autowired
+    private HeartRepository heartRepository;
 
     @Transactional
     public void createEvent(User user, Category category, String title, String location, String host, LocalDate startDate, LocalDate endDate, int free, String content, MultipartFile file) throws Exception{
@@ -48,10 +53,13 @@ public class EventService {
 
 
     //이벤트 상세보기
-    public EventResponseDto showEventDetail(Long event_id) {
+    public EventResponseDto showEventDetail(Long event_id, User user) {
 
         Event event = eventRepository.findById(event_id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,"잘못된 id입니다"));
+
+        Optional<Heart> heart = heartRepository.findByUserAndEvent(user, event);
+        boolean heartResult = heart.isPresent();
 
         return EventResponseDto.builder()
                 .event_id(event.getId())
@@ -64,6 +72,7 @@ public class EventService {
                 .free(event.isFree())
                 .content(event.getContent())
                 .keywords(event.getKeywords())
+                .heart(heartResult)
                 .build();
 
     }
