@@ -1,12 +1,15 @@
 package ewha_hackathon.repository;
 
 import ewha_hackathon.domain.Event;
+import ewha_hackathon.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 public interface EventRepository extends JpaRepository<Event, Long>, JpaSpecificationExecutor<Event> {
@@ -21,4 +24,20 @@ public interface EventRepository extends JpaRepository<Event, Long>, JpaSpecific
     @Modifying
     @Query("UPDATE Event e SET e.rsvp_count = CASE WHEN :increase = true THEN e.rsvp_count + 1 ELSE e.rsvp_count - 1 END WHERE e = :event")
     void updateRsvpCount(@Param("event") Event event, @Param("increase") boolean increase);
+
+    @Query(value = "SELECT * FROM event ORDER BY heart_count DESC LIMIT 3", nativeQuery = true)
+    List<Event> findByOrderByHeartCount();
+
+    @Query("SELECT e FROM Event e WHERE e.start_date <= :today AND e.end_date >= :today ORDER BY e.start_date LIMIT 3")
+    List<Event> findByOrderByStartDate(@Param("today") LocalDate today);
+
+    @Query("SELECT h.event FROM Heart h WHERE h.user = :user")
+    List<Event> findByUserHeart(@Param("user") User user);
+
+    @Query("SELECT r.event FROM Rsvp r WHERE r.user = :user")
+    List<Event> findByUserRsvp(@Param("user") User user);
+
+    @Query("SELECT e FROM Event e WHERE e.user_id = :user")
+    List<Event> findByUserRegister(@Param("user") User user);
+
 }
