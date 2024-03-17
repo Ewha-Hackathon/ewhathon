@@ -1,5 +1,6 @@
 package ewha_hackathon.suggestion;
 
+
 import ewha_hackathon.domain.Event;
 import ewha_hackathon.domain.Hashtag;
 import ewha_hackathon.domain.Suggestion;

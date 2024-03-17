@@ -1,7 +1,9 @@
-package ewha_hackathon.home.controller;
+package ewha_hackathon.mypage.controller;
 
 import ewha_hackathon.domain.User;
 import ewha_hackathon.home.service.HomeService;
+import ewha_hackathon.mypage.DTO.MypageResponseDto;
+import ewha_hackathon.mypage.service.MypageService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
@@ -11,19 +13,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/home")
-public class HomeController {
-    private final HomeService homeService;
+@RequestMapping("/mypage")
+public class MypageController {
+    private final MypageService mypageService;
 
     @GetMapping()
-    public void getHomeInfo(HttpSession session, Model model) {
+    public MypageResponseDto getMypageInfo(HttpSession session, Model model) {
         User user = (User)session.getAttribute("user");
         if (user == null)
             throw new IllegalStateException("세션 없음");
 
         model.addAttribute("currentUser", user);
-        model.addAttribute("HomeResponseDto", homeService.getHomeInfo(user));
-        //return homeService.getHomeInfo(user);
+        model.addAttribute("MypageResponseDto", mypageService.getMypageInfo(user));
+        return mypageService.getMypageInfo(user);
     }
-
 }

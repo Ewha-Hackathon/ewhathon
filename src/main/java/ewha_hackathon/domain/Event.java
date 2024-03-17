@@ -1,10 +1,10 @@
 package ewha_hackathon.domain;
 
-import ewha_hackathon.event.DTO.EventRequestDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -39,7 +39,11 @@ public class Event {
     private List<Hashtag> keywords = new ArrayList<>();  //해시태그
     private String filename;//파일이름
     private String filepath;//파일경로
-    private int count;  //좋아요 개수
+
+    @ColumnDefault("0")
+    private Integer heart_count;
+    @ColumnDefault("0")
+    private Integer rsvp_count;
 
     public String getContent() {
         return content;
@@ -67,7 +71,8 @@ public class Event {
                 null,
                 filename,
                 filepath,
-                0   //초기값 0 지정
+                0,
+                0
         );
     }
 }

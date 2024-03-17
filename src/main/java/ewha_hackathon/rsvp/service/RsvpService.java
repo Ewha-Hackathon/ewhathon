@@ -1,12 +1,12 @@
-package ewha_hackathon.heart.service;
+package ewha_hackathon.rsvp.service;
 
 import ewha_hackathon.domain.Event;
-import ewha_hackathon.domain.Heart;
+import ewha_hackathon.domain.Rsvp;
 import ewha_hackathon.domain.User;
-import ewha_hackathon.heart.DTO.HeartRequestDto;
 import ewha_hackathon.repository.EventRepository;
-import ewha_hackathon.repository.HeartRepository;
+import ewha_hackathon.repository.RsvpRepository;
 import ewha_hackathon.repository.UserRepository;
+import ewha_hackathon.rsvp.DTO.RsvpRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -15,48 +15,45 @@ import org.springframework.web.server.ResponseStatusException;
 
 @Service
 @RequiredArgsConstructor
-public class HeartService {
-    private final HeartRepository heartRepository;
+public class RsvpService {
+    private final RsvpRepository rsvpRepository;
     private final UserRepository userRepository;
     private final EventRepository eventRepository;
 
     @Transactional
-    public void insert(HeartRequestDto heartRequestDTO) throws Exception {
-        User user = userRepository.findById(heartRequestDTO.getUser_id())
+    public void insert(RsvpRequestDto rsvpRequestDto) throws Exception {
+        User user = userRepository.findById(rsvpRequestDto.getUser_id())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,"Could not found member id"));
 
-        Event event = eventRepository.findById(heartRequestDTO.getEvent_id())
+        Event event = eventRepository.findById(rsvpRequestDto.getEvent_id())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,"Could not found event id"));
 
         // 이미 좋아요되어있으면 에러 반환
-        if (heartRepository.findByUserAndEvent(user, event).isPresent()){
+        if (rsvpRepository.findByUserAndEvent(user, event).isPresent()){
             //TODO 409에러로 변경
             throw new Exception();
         }
 
-        Heart heart = Heart.builder()
+        Rsvp rsvp = Rsvp.builder()
                 .event(event)
                 .user(user)
                 .build();
 
-        heartRepository.save(heart);
-        eventRepository.updateHeartCount(event,true);
-
+        rsvpRepository.save(rsvp);
+        eventRepository.updateRsvpCount(event,true);
     }
     @Transactional
-    public void delete(HeartRequestDto heartRequestDTO) {
-        User user = userRepository.findById(heartRequestDTO.getUser_id())
+    public void delete(RsvpRequestDto rsvpRequestDto) {
+        User user = userRepository.findById(rsvpRequestDto.getUser_id())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,"Could not found member id"));
 
-        Event event = eventRepository.findById(heartRequestDTO.getEvent_id())
+        Event event = eventRepository.findById(rsvpRequestDto.getEvent_id())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,"Could not found event id"));
 
-        Heart heart = heartRepository.findByUserAndEvent(user, event)
+        Rsvp rsvp = rsvpRepository.findByUserAndEvent(user, event)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,"Could not found heart id"));
 
-        heartRepository.delete(heart);
-        eventRepository.updateHeartCount(event,false);
-
+        rsvpRepository.delete(rsvp);
+        eventRepository.updateRsvpCount(event,false);
     }
-
 }

@@ -1,25 +1,21 @@
 package ewha_hackathon.event.controller;
 
 import ewha_hackathon.domain.Category;
-import ewha_hackathon.domain.Event;
-import ewha_hackathon.event.DTO.EventRequestDto;
 import ewha_hackathon.domain.User;
 import ewha_hackathon.event.DTO.EventResponseDto;
 import ewha_hackathon.event.service.EventService;
-import ewha_hackathon.suggestion.SuggestionController;
 import ewha_hackathon.suggestion.SuggestionService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
-import java.util.List;
+
 
 @Controller
 @RequestMapping("/event")
@@ -31,6 +27,7 @@ public class EventController {
     private SuggestionService suggestionService;
 
     @PostMapping("/create")
+
     public String createEvent(@RequestParam("category") Category category,
                               @RequestParam("title") String title,
                               @RequestParam("location") String location,
@@ -54,6 +51,7 @@ public class EventController {
         return "redirect:/keywordsRegister/" + eventId;
 
 //        return ResponseEntity.status(HttpStatus.OK).body("공연 정보 추가 완료");
+
     }
 
 

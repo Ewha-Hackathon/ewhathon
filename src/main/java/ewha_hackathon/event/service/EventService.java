@@ -1,7 +1,6 @@
 package ewha_hackathon.event.service;
 
 import ewha_hackathon.domain.Category;
-import ewha_hackathon.event.DTO.EventRequestDto;
 import ewha_hackathon.domain.Event;
 import ewha_hackathon.domain.User;
 import ewha_hackathon.event.DTO.EventResponseDto;
@@ -16,6 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.io.File;
 import java.time.LocalDate;
+
 import java.util.*;
 
 @Service
