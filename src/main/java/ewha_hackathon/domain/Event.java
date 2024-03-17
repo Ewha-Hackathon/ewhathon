@@ -35,10 +35,11 @@ public class Event {
     private LocalDate end_date;
     private boolean free;
     private String content;
-    @ElementCollection
-    private List<Hashtag> keywords = new ArrayList<>();  //해시태그
     private String filename;//파일이름
     private String filepath;//파일경로
+
+    @Column(name = "selected_keywords", length = 500)
+    private String selectedKeywords;
 
     @ColumnDefault("0")
     private Integer heart_count;
@@ -68,11 +69,19 @@ public class Event {
                 endDate,
                 freeBoolean,
                 content,
-                null,
                 filename,
                 filepath,
+                null,
                 0,
                 0
         );
+    }
+
+    public void setSelectedKeywords(String selectedKeywords) {
+        this.selectedKeywords = selectedKeywords;
+    }
+
+    public String getSelectedKeywords() {
+        return selectedKeywords;
     }
 }

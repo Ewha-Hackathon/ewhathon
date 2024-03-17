@@ -5,13 +5,22 @@
   <title>Keywords Suggestion</title>
 </head>
 <body>
-<form th:action="@{/submitKeywords/${eventId}}" th:method="post">
-  <div th:each="keyword, iterStat : ${keywords}">
-    <input type="checkbox" th:value="${keyword}" th:name="selectedKeywords"/>
-    <label th:text="${keyword}"></label><br/>
+<form th:action="@{/keywordsRegister/{eventId}(eventId=${eventId})}" th:method="post">
+  <div>
+    <p>추천 태그:</p>
+    <div th:each="keyword : ${suggestedKeywords}">
+      <input type="checkbox" th:id="${'suggested-' + keyword}" th:name="selectedKeywords" th:value="${keyword}" />
+      <label th:for="${'suggested-' + keyword}" th:text="${keyword}"></label><br/>
+    </div>
   </div>
-  <input type="hidden" th:value="${eventId}" th:name="eventId"/>
-  <button type="submit">키워드 등록</button>
+  <div>
+    <p>모든 태그:</p>
+    <div th:each="keyword : ${allKeywords}">
+      <input type="checkbox" th:id="${'keyword-' + keyword}" th:name="selectedKeywords" th:value="${keyword}" />
+      <label th:for="${'keyword-' + keyword}" th:text="${keyword}"></label><br/>
+    </div>
+  </div>
+  <button type="submit">저장</button>
 </form>
 </body>
 </html>

@@ -24,7 +24,7 @@ public class EventResponseDto {
     private LocalDate end_date;
     private Boolean free;
     private String content;
-    private List<Hashtag> keywords;
+    private String selectedKeywords;
     //private MultipartFile file;
 
 }

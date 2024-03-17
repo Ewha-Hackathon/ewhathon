@@ -68,7 +68,7 @@ public class EventService {
                 .end_date(event.getEnd_date())
                 .free(event.isFree())
                 .content(event.getContent())
-                .keywords(event.getKeywords())
+                .selectedKeywords(event.getSelectedKeywords())
                 .build();
 
     }

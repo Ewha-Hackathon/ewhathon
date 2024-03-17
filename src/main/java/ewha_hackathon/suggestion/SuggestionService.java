@@ -69,4 +69,17 @@ public class SuggestionService {
         System.out.println("Event ID: " + eventId + ", Suggested Keywords: " + joinedKeywords);
     }
 
+    @Transactional
+    public void saveSelectedKeywords(Long eventId, List<Hashtag> selectedKeywords) {
+        Event event = eventRepository.findById(eventId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 이벤트가 존재하지 않습니다: " + eventId));
+        String joinedKeywords = selectedKeywords.stream()
+                .map(Enum::name)
+                .collect(Collectors.joining(","));
+        event.setSelectedKeywords(joinedKeywords);
+
+        System.out.println(joinedKeywords);
+        eventRepository.save(event);
+    }
+
 }

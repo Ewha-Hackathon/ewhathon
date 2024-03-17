@@ -22,6 +22,6 @@ public class EventRequestDto {
     private LocalDate end_date;
     private int free;
     private String content;
-    private List<Hashtag> keywords;
+    private String selectedKeywords;
 //    private MultipartFile file;
 }
