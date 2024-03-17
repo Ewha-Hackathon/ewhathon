@@ -2,6 +2,9 @@ package ewha_hackathon.domain;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Entity
 public class Suggestion {
 
@@ -20,7 +23,9 @@ public class Suggestion {
         this.event = event;
     }
 
-    public Suggestion(String suggestedKeywords) {
-        this.suggestedKeywords = suggestedKeywords;
+    public Suggestion(List<Hashtag> suggestedKeywords) {
+        this.suggestedKeywords = suggestedKeywords.stream()
+                .map(Enum::name)
+                .collect(Collectors.joining(","));
     }
 }

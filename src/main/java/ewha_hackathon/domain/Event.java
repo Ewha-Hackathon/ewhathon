@@ -36,7 +36,7 @@ public class Event {
     private boolean free;
     private String content;
     @ElementCollection
-    private List<String> keywords = new ArrayList<>();  //해시태그
+    private List<Hashtag> keywords = new ArrayList<>();  //해시태그
     private String filename;//파일이름
     private String filepath;//파일경로
 

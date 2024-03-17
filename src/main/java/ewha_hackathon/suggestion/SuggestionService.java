@@ -2,6 +2,7 @@ package ewha_hackathon.suggestion;
 
 
 import ewha_hackathon.domain.Event;
+import ewha_hackathon.domain.Hashtag;
 import ewha_hackathon.domain.Suggestion;
 import ewha_hackathon.repository.EventRepository;
 import ewha_hackathon.repository.SuggestionRepository;
@@ -17,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class SuggestionService {
@@ -57,23 +59,14 @@ public class SuggestionService {
     public void saveKeywords(Long eventId, List<String> keywords) {
         Event event = eventRepository.findById(eventId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 event_id 없음: " + eventId));
-        Suggestion suggestion = new Suggestion(String.join(",", keywords));
+        List<Hashtag> suggestedKeywords = Hashtag.parseKeywords(keywords);
+        Suggestion suggestion = new Suggestion(suggestedKeywords);
         suggestion.setEvent(event);
         suggestionRepository.save(suggestion);
-        System.out.println("Event ID: " + eventId + ", Suggested Keywords: " + String.join(",", keywords));
+        String joinedKeywords = suggestedKeywords.stream()
+                .map(Enum::name)
+                .collect(Collectors.joining(","));
+        System.out.println("Event ID: " + eventId + ", Suggested Keywords: " + joinedKeywords);
     }
-
-//    @Transactional
-//    public void updateEventKeywords(Long eventId, List<String> keywords) {
-//        try {
-//            Event event = eventRepository.findById(eventId)
-//                    .orElseThrow(() -> new IllegalArgumentException("해당 event_id 없음: " + eventId));
-//            Suggestion suggestion = new Suggestion();
-//            suggestion.setEvent(event);
-//            suggestion.setSuggestedKeywords(String.join(",", keywords));
-//            suggestionRepository.save(suggestion);
-//        } catch (Exception e) {
-//        }
-//    }
 
 }
