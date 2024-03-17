@@ -1,0 +1,58 @@
+*{
+    background-color: #f7f6f2;
+}
+
+/*메뉴창*/
+#logo{
+    display:flex;
+    justify-content: center;
+    padding: 50% 0px 20% 0px;
+    height: 80px;
+}
+
+/*로그인창*/
+#login{
+    display:flex;
+    flex-direction : column;
+    margin: 0px 40px;
+}
+
+#login > input, button{
+    margin-top: 20px;
+    height: 50px;
+}
+
+#login > input{
+    border: 1px gray solid;
+    border-radius: 10px;
+    padding-left: 20px;
+    font-size: 15px;
+    background-color: #FFFFFF;
+}
+
+#login > input:nth-child(2){
+    margin-bottom:15px;
+}
+
+input{
+    padding-right: 20px;
+}
+
+#button, #signUp{
+    border: none;
+    background-color: #497248;
+    border-radius: 25px;
+    color:#FFF7E8;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#button{
+    height: 65px;
+}
+
+#signUp{
+    padding: 18.1px 0px;
+    margin-top: 20px;
+}
