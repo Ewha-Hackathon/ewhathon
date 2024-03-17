@@ -1,6 +1,5 @@
 package ewha_hackathon.domain;
 
-import ewha_hackathon.event.DTO.EventRequestDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -35,15 +35,20 @@ public class Event {
     private LocalDate end_date;
     private boolean free;
     private String content;
-    @ElementCollection
-    private List<String> keywords;  //해시태그
     private String filename;//파일이름
     private String filepath;//파일경로
+
+    @Column(name = "selected_keywords", length = 500)
+    private String selectedKeywords;
 
     @ColumnDefault("0")
     private Integer heart_count;
     @ColumnDefault("0")
     private Integer rsvp_count;
+
+    public String getContent() {
+        return content;
+    }
 
     public static Event createEvent(User user, Category category, String title, String location, String host, LocalDate startDate, LocalDate endDate, int free, String content, String filename, String filepath) {
         boolean freeBoolean;
@@ -64,10 +69,19 @@ public class Event {
                 endDate,
                 freeBoolean,
                 content,
-                null,
                 filename,
                 filepath,
+                null,
                 0,
-                0);
+                0
+        );
+    }
+
+    public void setSelectedKeywords(String selectedKeywords) {
+        this.selectedKeywords = selectedKeywords;
+    }
+
+    public String getSelectedKeywords() {
+        return selectedKeywords;
     }
 }

@@ -1,6 +1,7 @@
 package ewha_hackathon.event.DTO;
 
 import ewha_hackathon.domain.Category;
+import ewha_hackathon.domain.Hashtag;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,6 +22,6 @@ public class EventRequestDto {
     private LocalDate end_date;
     private int free;
     private String content;
-    private List<String> keywords;
+    private String selectedKeywords;
 //    private MultipartFile file;
 }

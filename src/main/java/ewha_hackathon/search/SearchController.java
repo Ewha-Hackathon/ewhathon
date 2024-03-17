@@ -2,6 +2,8 @@ package ewha_hackathon.search;
 
 import ewha_hackathon.domain.Category;
 import ewha_hackathon.domain.Event;
+import ewha_hackathon.domain.Hashtag;
+import ewha_hackathon.domain.Heart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -31,17 +33,10 @@ public class SearchController {
             @RequestParam(required = false, name="startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @RequestParam(required = false, name="endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
             @RequestParam(required = false, name="free") Boolean free,
-            @RequestParam(required = false, name="keywords") List<String> keywords,
+            @RequestParam(required = false, name="keywords") List<Hashtag> keywords,
             Model model) {
 
-        List<String> keywordList = new ArrayList<>();
-        if (keywords != null && !keywords.isEmpty()) {
-            for (String keyword : keywords) {
-                keywordList.add(keyword.trim());
-            }
-        }
-
-        List<Event> events = searchService.searchEvents(title, category, startDate, endDate, free, keywordList);
+        List<Event> events = searchService.searchEvents(title, category, startDate, endDate, free, keywords);
 
         model.addAttribute("events", events);
 

@@ -38,6 +38,7 @@ public class HeartService {
 
         heartRepository.save(heart);
         eventRepository.updateHeartCount(event,true);
+
     }
     @Transactional
     public void delete(Long event_id, User user) {
@@ -49,6 +50,7 @@ public class HeartService {
 
         heartRepository.delete(heart);
         eventRepository.updateHeartCount(event,false);
+
     }
 
 }
